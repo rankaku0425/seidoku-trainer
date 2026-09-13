@@ -111,24 +111,54 @@ async function getAozoraList() {
     const iPersonFlag = col('人物著作権フラグ');
     const iLastName = col('姓');
     const iFirstName = col('名');
+    const iRole = col('役割フラグ');
     const iHtmlUrl = col('XHTML/HTMLファイルURL');
     const iHtmlEncoding = col('XHTML/HTMLファイル符号化方式');
     const iCardUrl = col('図書カードURL');
 
-    const list = [];
+    // CSVは「作品×人物」の組み合わせごとに1行のため、同じ作品でも著者・翻訳者・校訂者が別々の行に分かれている。
+    // 作品IDでグループ化し、役割フラグ（著者/翻訳者/編者/校訂者）ごとに人名をまとめる。
+    // これにより「同じタイトルだが訳者が違う」別作品（例: 同名の海外小説の異なる訳者版）を見分けられるようにする
+    const worksById = new Map();
     for (let i = 1; i < lines.length; i++) {
       const cols = parseCsvLine(lines[i]);
       if (cols[iWorkFlag] !== 'なし' || cols[iPersonFlag] !== 'なし') continue; // 著作権切れのみ
       if (!cols[iHtmlUrl]) continue; // 本文ファイルがあるもののみ
-      list.push({
-        workId: cols[iWorkId],
-        title: cols[iTitle],
-        author: `${cols[iLastName]}${cols[iFirstName]}`,
-        htmlUrl: cols[iHtmlUrl],
-        htmlEncoding: cols[iHtmlEncoding] || 'ShiftJIS',
-        cardUrl: cols[iCardUrl],
-      });
+
+      const workId = cols[iWorkId];
+      if (!worksById.has(workId)) {
+        worksById.set(workId, {
+          workId,
+          title: cols[iTitle],
+          htmlUrl: cols[iHtmlUrl],
+          htmlEncoding: cols[iHtmlEncoding] || 'ShiftJIS',
+          cardUrl: cols[iCardUrl],
+          authors: [],
+          translators: [],
+          editors: [],
+        });
+      }
+      const work = worksById.get(workId);
+      const name = `${cols[iLastName]}${cols[iFirstName]}`;
+      if (cols[iRole] === '著者') work.authors.push(name);
+      else if (cols[iRole] === '翻訳者') work.translators.push(name);
+      else if (cols[iRole] === '編者' || cols[iRole] === '校訂者') work.editors.push(name);
     }
+
+    const list = [...worksById.values()].map((w) => {
+      let note = null;
+      if (w.translators.length) note = `${w.translators.join('・')}訳`;
+      else if (w.editors.length) note = `${w.editors.join('・')}校訂`;
+      return {
+        workId: w.workId,
+        title: w.title,
+        author: w.authors.length ? w.authors.join('・') : (w.editors[0] ?? ''),
+        note,
+        htmlUrl: w.htmlUrl,
+        htmlEncoding: w.htmlEncoding,
+        cardUrl: w.cardUrl,
+      };
+    });
     aozoraListCache = list;
     aozoraListCachedAt = Date.now();
     return list;
@@ -152,7 +182,7 @@ app.get('/api/aozora-search', lightLimiter, async (req, res) => {
     const results = list
       .filter((item) => keywords.every((kw) => item.title.includes(kw) || item.author.includes(kw)))
       .slice(0, 30)
-      .map(({ workId, title, author, cardUrl }) => ({ workId, title, author, cardUrl }));
+      .map(({ workId, title, author, note, cardUrl }) => ({ workId, title, author, note, cardUrl }));
     res.json({ results });
   } catch (err) {
     console.error('aozora-search error:', err);

@@ -213,7 +213,10 @@ export default function AozoraSelector({ onUseText }) {
               />
               <div className="aozora-result-info">
                 <span className="aozora-result-title">{work.title}</span>
-                <span className="aozora-result-author">{work.author}</span>
+                <span className="aozora-result-author">
+                  {work.author}
+                  {work.note ? `（${work.note}）` : ''}
+                </span>
               </div>
             </label>
           ))}
