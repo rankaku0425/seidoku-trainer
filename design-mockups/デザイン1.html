@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>デザイン案1: 教科書ノート系 - 精読トレーナー</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
+  :root {
+    --paper: #faf6ec;
+    --ink: #221f1a;
+    --ink-soft: #5b5347;
+    --red: #b7331f;
+    --rule: rgba(34,31,26,0.12);
+    --line-red: rgba(183,51,31,0.35);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin:0;
+    background: var(--paper);
+    background-image: repeating-linear-gradient(to bottom, transparent 0 35px, var(--rule) 35px 36px);
+    color: var(--ink);
+    font-family: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", sans-serif;
+    line-height:1.8;
+  }
+  .page { max-width: 880px; margin:0 auto; padding: 40px 56px 80px; position:relative; }
+  .page::before {
+    content:"";
+    position:absolute; top:0; bottom:0; left:40px;
+    width:2px; background: var(--line-red);
+  }
+  header.app-head { padding-left: 20px; margin-bottom: 32px; }
+  h1.app-title {
+    font-family:"Shippori Mincho", serif;
+    font-size: 2rem; font-weight:700; margin:0 0 6px;
+    letter-spacing:.04em;
+  }
+  .app-sub { margin:0; color: var(--ink-soft); font-size:.9rem; }
+  nav.mode-tabs { display:flex; gap:0; margin: 28px 0 24px 20px; border-bottom:1px solid var(--ink); flex-wrap:wrap; }
+  nav.mode-tabs a {
+    padding:10px 18px; text-decoration:none; color:var(--ink-soft); font-size:.85rem; font-weight:500;
+    border:1px solid transparent; border-bottom:none; position:relative; top:1px;
+  }
+  nav.mode-tabs a.active {
+    color:var(--ink); border-color: var(--ink); background: var(--paper); font-weight:700;
+  }
+  section { margin-left:20px; margin-bottom:36px; }
+  h2.section-title { font-family:"Shippori Mincho",serif; font-size:1.05rem; border-left:4px solid var(--red); padding-left:10px; margin:0 0 14px; }
+  .sample-card {
+    border:1px solid var(--ink); padding:14px 16px; margin-bottom:10px; background: var(--paper);
+  }
+  .sample-card .meta { font-size:.75rem; color:var(--ink-soft); margin:2px 0 8px; }
+  .sample-card .preview { font-size:.85rem; color:var(--ink-soft); margin:0; }
+  .reading-panel { border:1px solid var(--ink); padding:24px 28px; font-family:"Shippori Mincho",serif; font-size:1.05rem; }
+  .marker { border-bottom:2px dotted var(--red); padding-bottom:2px; position:relative; }
+  .marker sup { color:var(--red); font-family:"Zen Kaku Gothic New",sans-serif; font-weight:700; margin-left:2px; }
+  .qa-panel { border:1px solid var(--ink); padding:22px 24px; margin-top:18px; }
+  .q-block { margin-bottom:22px; }
+  .q-num { display:inline-block; border:1px solid var(--ink); width:24px; height:24px; text-align:center; line-height:22px; font-size:.8rem; font-weight:700; margin-right:8px; }
+  .q-text { font-weight:500; }
+  .choice { display:flex; align-items:center; gap:10px; padding:8px 10px; border-bottom:1px dashed var(--rule); cursor:pointer; }
+  .choice input { accent-color: var(--red); }
+  .choice.selected { background: rgba(183,51,31,0.06); }
+  .hint-btn { border:1px dashed var(--ink-soft); background:none; color:var(--ink-soft); font-size:.75rem; padding:5px 12px; cursor:pointer; margin-top:8px; }
+  textarea.answer { width:100%; border:1px solid var(--ink); background:var(--paper); font-family:inherit; font-size:.9rem; padding:10px; resize:vertical; }
+  .submit-btn {
+    display:inline-block; margin-top:18px; padding:11px 28px; background: var(--ink); color: var(--paper);
+    border:1px solid var(--ink); font-weight:700; font-size:.9rem; letter-spacing:.05em; cursor:pointer;
+  }
+  .submit-btn:hover { background: var(--red); border-color: var(--red); }
+  .note { margin-left:20px; font-size:.75rem; color:var(--ink-soft); }
+</style>
+</head>
+<body>
+ <div class="page">
+  <header class="app-head">
+    <h1 class="app-title">精読トレーナー</h1>
+    <p class="app-sub">文章を一文ずつ丁寧に読む力を鍛えよう</p>
+  </header>
+
+  <nav class="mode-tabs">
+    <a href="#" class="active">サンプルテキスト</a>
+    <a href="#">テキストを入力する</a>
+    <a href="#">AIで生成する</a>
+    <a href="#">青空文庫から探す</a>
+  </nav>
+
+  <section>
+    <h2 class="section-title">テキストを選ぶ</h2>
+    <div class="sample-card">
+      <strong>言葉の力</strong>
+      <p class="meta">8文・412文字・中学2年生・言語／文学</p>
+      <p class="preview">わたしたちは日々、言葉を通して考え、言葉を通して人とつながっている。しかし、その言葉の力を…</p>
+    </div>
+    <div class="sample-card">
+      <strong>宇宙開発の未来</strong>
+      <p class="meta">6文・358文字・高校1年生・科学／宇宙</p>
+      <p class="preview">人類が初めて月面に降り立ってから半世紀以上が経過した。この間、宇宙開発は…</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">本文</h2>
+    <div class="reading-panel">
+      科学技術の発展は、私たちの生活を<span class="marker">飛躍的<sup>①</sup></span>に便利にしてきた。かつて数日かかっていた作業は、今では数秒で終わる。だが、その速さの裏側で、私たちが失いつつあるものは何だろうか。
+    </div>
+
+    <div class="qa-panel">
+      <div class="q-block">
+        <span class="q-num">1</span><span class="q-text">下線部①「飛躍的に」の意味として最も適切なものを選びなさい。</span>
+        <div style="margin-top:10px;">
+          <label class="choice selected"><input type="radio" name="q1" checked> 急激に大きく進歩するさま</label>
+          <label class="choice"><input type="radio" name="q1"> ゆっくりと着実に進むさま</label>
+          <label class="choice"><input type="radio" name="q1"> 予測通りに進むさま</label>
+        </div>
+        <button class="hint-btn">ヒントを見る</button>
+      </div>
+      <div class="q-block">
+        <span class="q-num">2</span><span class="q-text">この段落で筆者が問いかけている内容を40字以内でまとめなさい。</span>
+        <textarea class="answer" rows="3" placeholder="答えを入力してください"></textarea>
+      </div>
+      <button class="submit-btn">回答する →</button>
+    </div>
+  </section>
+
+  <p class="note">デザイン案1 ｜ 教科書ノート系 ― 罫線・赤ペン・活字体で「紙の教材」らしさを再現</p>
+ </div>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>デザイン案9: エディトリアル・余白系 - 精読トレーナー</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap');
+  :root {
+    --bg:#fbfaf7; --ink:#1c1c1a; --sub:#7a7770; --rust:#a8532f; --line:#dedad0;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:"Zen Kaku Gothic New",sans-serif; line-height:1.9; }
+  .wrap { max-width:720px; margin:0 auto; padding:80px 32px 120px; }
+
+  header { margin-bottom:56px; }
+  .eyebrow { font-size:.75rem; color:var(--sub); letter-spacing:.14em; margin-bottom:14px; }
+  h1.title { font-family:"Zen Old Mincho",serif; font-weight:800; font-size:2.6rem; margin:0 0 14px; letter-spacing:.01em; }
+  .sub { font-size:.95rem; color:var(--sub); max-width:36em; }
+
+  nav.tabs { display:flex; gap:32px; margin:44px 0 60px; border-bottom:1px solid var(--line); padding-bottom:16px; flex-wrap:wrap; }
+  nav.tabs a { text-decoration:none; color:var(--sub); font-size:.86rem; padding-bottom:2px; }
+  nav.tabs a.active { color:var(--ink); font-weight:700; border-bottom:2px solid var(--rust); padding-bottom:16px; margin-bottom:-16px; }
+
+  h2.section-title { font-size:.78rem; color:var(--sub); letter-spacing:.1em; margin:0 0 26px; }
+
+  .index-row { display:flex; justify-content:space-between; align-items:baseline; gap:20px; padding:22px 0; border-bottom:1px solid var(--line); }
+  .index-row:first-of-type { border-top:1px solid var(--line); }
+  .index-row strong { font-family:"Zen Old Mincho",serif; font-size:1.15rem; font-weight:600; display:block; margin-bottom:6px; }
+  .index-row .preview { font-size:.85rem; color:var(--sub); margin:0; max-width:34em; }
+  .index-row .meta { font-size:.75rem; color:var(--sub); white-space:nowrap; text-align:right; }
+
+  .passage-section { margin-top:70px; }
+  .passage-number { font-family:"Zen Old Mincho",serif; font-size:5rem; font-weight:800; color:var(--line); line-height:1; margin-bottom:-30px; }
+  .reading-panel { font-size:1.18rem; line-height:2; padding-top:10px; }
+  .marker { border-bottom:2px solid var(--rust); padding-bottom:2px; }
+  .marker sup { color:var(--rust); font-family:"Zen Old Mincho",serif; font-weight:700; }
+
+  .qa-panel { margin-top:70px; }
+  .q-block { padding:32px 0; border-top:1px solid var(--line); }
+  .q-block:last-of-type { border-bottom:1px solid var(--line); }
+  .q-label { font-family:"Zen Old Mincho",serif; font-size:.9rem; color:var(--rust); font-weight:700; margin-bottom:10px; }
+  .q-text { font-size:1rem; margin:0 0 18px; }
+  .choice { display:flex; align-items:center; gap:10px; font-size:.92rem; padding:9px 0; }
+  .choice input { accent-color: var(--rust); width:16px; height:16px; }
+  .hint-btn { margin-top:14px; background:none; border:none; border-bottom:1px solid var(--sub); color:var(--sub); font-size:.78rem; padding:0 0 2px; cursor:pointer; }
+  textarea.answer { width:100%; border:none; border-bottom:1px solid var(--ink); background:transparent; padding:8px 0; font-family:inherit; font-size:.92rem; resize:vertical; }
+  textarea.answer:focus { outline:none; border-bottom:2px solid var(--rust); }
+  .submit-btn { margin-top:36px; padding:16px 0; width:100%; background:var(--ink); color:var(--bg); border:none; font-size:.92rem; letter-spacing:.06em; cursor:pointer; }
+  .submit-btn:hover { background:var(--rust); }
+
+  .footnote { font-size:.75rem; color:var(--sub); margin-top:60px; border-top:1px solid var(--line); padding-top:20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">READING PRACTICE JOURNAL</p>
+    <h1 class="title">精読トレーナー</h1>
+    <p class="sub">文章を一文ずつ丁寧に読む力を鍛えよう。余白を活かした誌面のように、一つの文章とじっくり向き合う。</p>
+  </header>
+
+  <nav class="tabs">
+    <a href="#" class="active">サンプルテキスト</a>
+    <a href="#">テキストを入力する</a>
+    <a href="#">AIで生成する</a>
+    <a href="#">青空文庫から探す</a>
+  </nav>
+
+  <h2 class="section-title">テキストを選ぶ</h2>
+  <div class="index-row">
+    <div>
+      <strong>言葉の力</strong>
+      <p class="preview">わたしたちは日々、言葉を通して考え、言葉を通して人とつながっている…</p>
+    </div>
+    <div class="meta">8文<br>412文字<br>中学2年生</div>
+  </div>
+  <div class="index-row">
+    <div>
+      <strong>宇宙開発の未来</strong>
+      <p class="preview">人類が初めて月面に降り立ってから半世紀以上が経過した…</p>
+    </div>
+    <div class="meta">6文<br>358文字<br>高校1年生</div>
+  </div>
+
+  <div class="passage-section">
+    <div class="passage-number">01</div>
+    <h2 class="section-title">本文</h2>
+    <div class="reading-panel">
+      科学技術の発展は、私たちの生活を<span class="marker">飛躍的<sup>①</sup></span>に便利にしてきた。かつて数日かかっていた作業は、今では数秒で終わる。だが、その速さの裏側で、私たちが失いつつあるものは何だろうか。
+    </div>
+  </div>
+
+  <div class="qa-panel">
+    <h2 class="section-title">設問</h2>
+    <div class="q-block">
+      <p class="q-label">Q1</p>
+      <p class="q-text">下線部①「飛躍的に」の意味として最も適切なものを選びなさい。</p>
+      <label class="choice"><input type="radio" name="q1" checked> 急激に大きく進歩するさま</label>
+      <label class="choice"><input type="radio" name="q1"> ゆっくりと着実に進むさま</label>
+      <label class="choice"><input type="radio" name="q1"> 予測通りに進むさま</label>
+      <button class="hint-btn">ヒントを見る</button>
+    </div>
+    <div class="q-block">
+      <p class="q-label">Q2</p>
+      <p class="q-text">この段落で筆者が問いかけている内容を40字以内でまとめなさい。</p>
+      <textarea class="answer" rows="2" placeholder="答えを入力してください"></textarea>
+    </div>
+    <button class="submit-btn">回答する →</button>
+  </div>
+
+  <p class="footnote">デザイン案9 ／ エディトリアル・余白系 ― 罫線と余白のみで構造を作る雑誌誌面のような組版。装飾を極力排し、一つの文章に集中できる静かな読書体験を演出</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>デザイン案8: 地図・案内図系 - 精読トレーナー</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700&display=swap');
+  :root {
+    --bg:#f0ede3; --card:#fbfaf4; --ink:#2b3a2f; --sub:#6b7568; --route:#1f6f5c; --pin:#c1502e;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:"Zen Kaku Gothic New",sans-serif; line-height:1.85; }
+  .wrap { max-width:920px; margin:0 auto; padding:44px 40px 90px; }
+
+  header { margin-bottom:28px; }
+  .eyebrow { font-family:"JetBrains Mono",monospace; font-size:.68rem; color:var(--route); letter-spacing:.15em; }
+  h1.title { font-weight:900; font-size:2.1rem; margin:6px 0 4px; }
+  .sub { font-size:.85rem; color:var(--sub); }
+
+  /* 進行ルート（今どの工程か） */
+  .route-bar { display:flex; align-items:center; margin:28px 0 32px; }
+  .route-step { display:flex; align-items:center; gap:8px; font-size:.78rem; color:var(--sub); }
+  .route-step .dot { width:10px; height:10px; border-radius:50%; border:2px solid var(--sub); background:var(--card); }
+  .route-step.active { color:var(--route); font-weight:700; }
+  .route-step.active .dot { border-color:var(--route); background:var(--route); }
+  .route-line { flex:1; height:2px; background:repeating-linear-gradient(to right, var(--sub) 0 4px, transparent 4px 8px); margin:0 10px; }
+
+  nav.tabs { display:flex; gap:10px; margin-bottom:28px; flex-wrap:wrap; }
+  nav.tabs a { text-decoration:none; color:var(--ink); font-size:.8rem; font-weight:700; padding:9px 18px; background:var(--card); border:1px solid rgba(43,58,47,.3); }
+  nav.tabs a.active { background:var(--route); color:#fff; border-color:var(--route); }
+
+  h2.section-title { font-family:"JetBrains Mono",monospace; font-size:.72rem; letter-spacing:.12em; color:var(--sub); text-transform:uppercase; margin:0 0 14px; }
+
+  .card { position:relative; background:var(--card); border:1px solid rgba(43,58,47,.3); padding:16px 18px 16px 44px; margin-bottom:12px; }
+  .card::before { content:"📍"; position:absolute; left:14px; top:16px; filter:grayscale(1) contrast(1.6); font-size:1rem; }
+  .card .meta { font-family:"JetBrains Mono",monospace; font-size:.68rem; color:var(--sub); margin:3px 0 6px; }
+  .card .preview { font-size:.83rem; color:#41493f; margin:0; }
+
+  .reading-panel { background:var(--card); border:1px solid rgba(43,58,47,.3); padding:30px 32px; margin-top:6px; font-size:1.02rem; position:relative; }
+  .reading-panel .pin-label { position:absolute; top:-11px; left:24px; background:var(--route); color:#fff; font-family:"JetBrains Mono",monospace; font-size:.65rem; padding:3px 10px; letter-spacing:.08em; }
+  .marker { border-bottom:2px solid var(--pin); padding-bottom:1px; position:relative; }
+  .marker sup { font-family:"JetBrains Mono",monospace; color:var(--pin); font-weight:700; }
+
+  .qa-panel { background:var(--card); border:1px solid rgba(43,58,47,.3); padding:24px 26px; margin-top:24px; }
+  .q-block { margin-bottom:22px; padding-left:26px; border-left:2px dotted var(--sub); }
+  .q-label { font-family:"JetBrains Mono",monospace; font-size:.72rem; color:var(--pin); font-weight:700; }
+  .q-text { font-size:.92rem; margin:4px 0 10px; }
+  .choice { display:flex; align-items:center; gap:9px; font-size:.86rem; padding:7px 0; }
+  .choice input { accent-color: var(--pin); }
+  .hint-btn { margin-top:8px; background:none; border:1px solid var(--sub); color:var(--sub); font-family:"JetBrains Mono",monospace; font-size:.7rem; padding:6px 14px; cursor:pointer; }
+  textarea.answer { width:100%; border:1px solid rgba(43,58,47,.4); background:#fff; padding:11px; font-family:inherit; font-size:.85rem; }
+  .submit-btn { margin-top:16px; padding:12px 30px; background:var(--route); color:#fff; border:none; font-weight:700; font-size:.88rem; letter-spacing:.03em; cursor:pointer; }
+  .submit-btn:hover { background:#175646; }
+
+  .footnote { text-align:center; font-family:"JetBrains Mono",monospace; font-size:.65rem; color:var(--sub); margin-top:40px; letter-spacing:.03em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">READING ROUTE MAP</p>
+    <h1 class="title">精読トレーナー</h1>
+    <p class="sub">文章を一文ずつ丁寧に読む力を鍛えよう</p>
+  </header>
+
+  <div class="route-bar">
+    <div class="route-step active"><span class="dot"></span>テキスト選択</div>
+    <div class="route-line"></div>
+    <div class="route-step"><span class="dot"></span>精読</div>
+    <div class="route-line"></div>
+    <div class="route-step"><span class="dot"></span>採点</div>
+    <div class="route-line"></div>
+    <div class="route-step"><span class="dot"></span>成長記録</div>
+  </div>
+
+  <nav class="tabs">
+    <a href="#" class="active">サンプルテキスト</a>
+    <a href="#">テキストを入力する</a>
+    <a href="#">AIで生成する</a>
+    <a href="#">青空文庫から探す</a>
+  </nav>
+
+  <h2 class="section-title">Select Text</h2>
+  <div class="card">
+    <strong>言葉の力</strong>
+    <p class="meta">8文・412文字・中学2年生・言語／文学</p>
+    <p class="preview">わたしたちは日々、言葉を通して考え、言葉を通して人とつながっている…</p>
+  </div>
+
+  <h2 class="section-title" style="margin-top:30px;">Passage</h2>
+  <div class="reading-panel">
+    <span class="pin-label">現在地</span>
+    科学技術の発展は、私たちの生活を<span class="marker">飛躍的<sup>①</sup></span>に便利にしてきた。かつて数日かかっていた作業は、今では数秒で終わる。だが、その速さの裏側で、私たちが失いつつあるものは何だろうか。
+  </div>
+
+  <div class="qa-panel">
+    <div class="q-block">
+      <p class="q-label">Q1</p>
+      <p class="q-text">下線部①「飛躍的に」の意味として最も適切なものを選びなさい。</p>
+      <label class="choice"><input type="radio" name="q1" checked> 急激に大きく進歩するさま</label>
+      <label class="choice"><input type="radio" name="q1"> ゆっくりと着実に進むさま</label>
+      <label class="choice"><input type="radio" name="q1"> 予測通りに進むさま</label>
+      <button class="hint-btn">ヒントを見る</button>
+    </div>
+    <div class="q-block">
+      <p class="q-label">Q2</p>
+      <p class="q-text">この段落で筆者が問いかけている内容を40字以内でまとめなさい。</p>
+      <textarea class="answer" rows="3" placeholder="答えを入力してください"></textarea>
+    </div>
+    <button class="submit-btn">回答する →</button>
+  </div>
+
+  <p class="footnote">デザイン案8 ／ 地図・案内図系 ― 進行ルート表示とピン留めの本文で「今どこを読んでいるか」を常に把握できる構成に</p>
+</div>
+</body>
+</html>

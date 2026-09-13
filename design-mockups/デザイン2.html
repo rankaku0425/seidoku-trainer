@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>デザイン案2: 新聞編集・Swiss系 - 精読トレーナー</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap');
+  :root {
+    --bg: #f6f5f1;
+    --ink: #111111;
+    --sub: #55524a;
+    --navy: #1c2d4d;
+    --rule: #111111;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",sans-serif;
+    line-height:1.75;
+  }
+  .wrap { max-width:1000px; margin:0 auto; padding:32px 40px 90px; }
+
+  .kicker { font-family:"JetBrains Mono",monospace; font-size:.68rem; letter-spacing:.18em; color:var(--sub); text-align:center; }
+  .masthead { font-family:"Shippori Mincho",serif; font-weight:800; font-size:2.6rem; text-align:center; margin:6px 0 4px; letter-spacing:.06em; }
+  .masthead-sub { text-align:center; font-size:.8rem; color:var(--sub); margin-bottom:14px; }
+  .rule-thick { border:none; border-top:4px solid var(--rule); margin:0; }
+  .rule-thin { border:none; border-top:1px solid var(--rule); margin:3px 0 22px; }
+
+  nav.section-nav { display:flex; justify-content:center; gap:26px; font-size:.82rem; margin-bottom:30px; flex-wrap:wrap; }
+  nav.section-nav a { color:var(--sub); text-decoration:none; padding-bottom:6px; }
+  nav.section-nav a.active { color:var(--ink); font-weight:700; border-bottom:3px solid var(--navy); }
+
+  .columns { display:grid; grid-template-columns: 260px 1px 1fr; gap:28px; }
+  .col-rule { background:var(--rule); }
+
+  .index-title { font-family:"Shippori Mincho",serif; font-weight:700; font-size:1rem; margin:0 0 14px; }
+  .index-item { display:flex; gap:10px; padding:12px 0; border-bottom:1px solid #ddd8cc; }
+  .index-num { font-family:"JetBrains Mono",monospace; font-size:.75rem; color:var(--sub); padding-top:2px; }
+  .index-item strong { display:block; font-size:.9rem; margin-bottom:3px; }
+  .index-item span { font-size:.72rem; color:var(--sub); }
+
+  .headline { font-family:"Shippori Mincho",serif; font-size:1.5rem; font-weight:700; margin:0 0 8px; line-height:1.5; }
+  .byline { font-family:"JetBrains Mono",monospace; font-size:.7rem; color:var(--sub); letter-spacing:.05em; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--rule); }
+  .byline b { color:var(--ink); }
+  .article-body { font-size:1rem; }
+  .article-body::first-letter { font-family:"Shippori Mincho",serif; font-size:3.2rem; float:left; line-height:.85; padding:4px 8px 0 0; font-weight:800; }
+  .marker { border-bottom:2px solid var(--navy); font-weight:700; }
+  .marker sup { font-family:"JetBrains Mono",monospace; color:var(--navy); }
+
+  .qa-box { margin-top:26px; border:1px solid var(--rule); }
+  .qa-head { background:var(--navy); color:#fff; font-size:.78rem; font-weight:700; letter-spacing:.1em; padding:9px 16px; }
+  .qa-body { padding:18px 18px 22px; }
+  .q-row { margin-bottom:18px; }
+  .q-label { font-family:"JetBrains Mono",monospace; font-size:.7rem; color:var(--navy); font-weight:700; }
+  .q-text { font-size:.92rem; margin:4px 0 10px; }
+  .choice { display:flex; gap:8px; align-items:center; font-size:.85rem; padding:6px 0; }
+  .choice input { accent-color: var(--navy); }
+  textarea.answer { width:100%; border:1px solid var(--rule); padding:9px; font-family:inherit; font-size:.85rem; }
+  .hint-link { font-size:.72rem; color:var(--navy); text-decoration:underline; cursor:pointer; background:none; border:none; padding:0; }
+  .submit-btn { display:block; width:100%; margin-top:16px; padding:12px; background:var(--ink); color:#fff; border:none; font-weight:700; font-size:.85rem; letter-spacing:.15em; cursor:pointer; }
+  .submit-btn:hover { background:var(--navy); }
+
+  .footnote { text-align:center; font-family:"JetBrains Mono",monospace; font-size:.68rem; color:var(--sub); margin-top:40px; }
+
+  @media (max-width: 720px) {
+    .columns { grid-template-columns: 1fr; }
+    .col-rule { display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">STEADY READING JOURNAL — 第 01 号</p>
+  <h1 class="masthead">精読トレーナー</h1>
+  <p class="masthead-sub">文章を一文ずつ丁寧に読む力を鍛えよう</p>
+  <hr class="rule-thick"><hr class="rule-thin">
+
+  <nav class="section-nav">
+    <a href="#" class="active">サンプルテキスト</a>
+    <a href="#">テキストを入力する</a>
+    <a href="#">AIで生成する</a>
+    <a href="#">青空文庫から探す</a>
+  </nav>
+
+  <div class="columns">
+    <div>
+      <p class="index-title">目次 — Index</p>
+      <div class="index-item"><span class="index-num">01</span><div><strong>言葉の力</strong><span>8文・412字・中2・言語文学</span></div></div>
+      <div class="index-item"><span class="index-num">02</span><div><strong>宇宙開発の未来</strong><span>6文・358字・高1・科学</span></div></div>
+      <div class="index-item"><span class="index-num">03</span><div><strong>都市と自然の共生</strong><span>7文・390字・高2・環境</span></div></div>
+    </div>
+    <div class="col-rule"></div>
+    <div>
+      <p class="byline">本日の記事 ｜ 難易度：<b>中学2年生</b> ｜ 出典：サンプルテキスト</p>
+      <h2 class="headline">言葉の力</h2>
+      <p class="article-body">科学技術の発展は、私たちの生活を<span class="marker">飛躍的<sup>①</sup></span>に便利にしてきた。かつて数日かかっていた作業は、今では数秒で終わる。だが、その速さの裏側で、私たちが失いつつあるものは何だろうか。</p>
+
+      <div class="qa-box">
+        <div class="qa-head">設問 QUESTIONS</div>
+        <div class="qa-body">
+          <div class="q-row">
+            <p class="q-label">Q1</p>
+            <p class="q-text">下線部①「飛躍的に」の意味として最も適切なものを選びなさい。</p>
+            <label class="choice"><input type="radio" name="q1" checked> 急激に大きく進歩するさま</label>
+            <label class="choice"><input type="radio" name="q1"> ゆっくりと着実に進むさま</label>
+            <label class="choice"><input type="radio" name="q1"> 予測通りに進むさま</label>
+            <div style="margin-top:6px;"><button class="hint-link">ヒントを見る</button></div>
+          </div>
+          <div class="q-row">
+            <p class="q-label">Q2</p>
+            <p class="q-text">この段落で筆者が問いかけている内容を40字以内でまとめなさい。</p>
+            <textarea class="answer" rows="3" placeholder="答えを入力してください"></textarea>
+          </div>
+          <button class="submit-btn">回答する</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="footnote">デザイン案2 ／ 新聞編集・SWISSグリッド系 ― 段組み・活字ヘッドライン・単色アクセントで情報の権威性を演出</p>
+</div>
+</body>
+</html>

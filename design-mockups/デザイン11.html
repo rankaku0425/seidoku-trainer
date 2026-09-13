@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>デザイン案11: 巨大見出し・ポスター系 - 精読トレーナー</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap');
+  :root {
+    --bg:#f5f3ec; --ink:#111111; --red:#e0311b; --card:#ffffff;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:"Zen Kaku Gothic New",sans-serif; line-height:1.7; }
+  .wrap { max-width:960px; margin:0 auto; padding:0 0 100px; }
+
+  header { background:var(--ink); color:var(--bg); padding:56px 40px 44px; }
+  .eyebrow { font-size:.78rem; letter-spacing:.25em; color:var(--red); font-weight:700; margin-bottom:10px; }
+  h1.title { font-weight:900; font-size:5.2rem; line-height:.95; margin:0 0 14px; letter-spacing:-.02em; }
+  .sub { font-size:1rem; color:#cfcbc0; max-width:30em; }
+
+  nav.tabs { display:flex; gap:0; flex-wrap:wrap; border-bottom:6px solid var(--ink); }
+  nav.tabs a { text-decoration:none; color:var(--ink); font-size:.9rem; font-weight:700; padding:16px 26px; border-right:2px solid var(--ink); }
+  nav.tabs a:last-child { border-right:none; }
+  nav.tabs a.active { background:var(--red); color:#fff; }
+
+  .section { padding:44px 40px 0; }
+  h2.section-title { font-weight:900; font-size:1.5rem; margin:0 0 22px; display:inline-block; background:var(--ink); color:var(--bg); padding:4px 14px; }
+
+  .card { background:var(--card); border:3px solid var(--ink); padding:18px 22px; margin-bottom:14px; }
+  .card .meta { font-size:.76rem; font-weight:700; color:var(--red); margin:2px 0 8px; letter-spacing:.03em; }
+  .card strong { font-size:1.15rem; }
+  .card .preview { font-size:.88rem; color:#333; margin:0; }
+
+  .reading-panel { background:var(--card); border:3px solid var(--ink); padding:38px 36px; margin-top:6px; font-size:1.25rem; line-height:1.9; font-weight:500; }
+  .marker { background:var(--red); color:#fff; padding:2px 6px; font-weight:700; box-decoration-break:clone; -webkit-box-decoration-break:clone; }
+  .marker sup { color:#fff; font-weight:900; }
+
+  .qa-panel { margin-top:36px; }
+  .q-block { background:var(--card); border:3px solid var(--ink); padding:26px 28px; margin-bottom:20px; position:relative; }
+  .q-giant-num { position:absolute; top:-22px; left:20px; background:var(--ink); color:var(--bg); font-weight:900; font-size:1.4rem; padding:6px 16px; }
+  .q-text { font-size:1.05rem; font-weight:700; margin:14px 0 16px; }
+  .choice { display:flex; align-items:center; gap:12px; font-size:.95rem; font-weight:600; padding:12px 14px; border:2px solid var(--ink); margin-top:8px; }
+  .choice input { accent-color: var(--red); width:18px; height:18px; }
+  .hint-btn { margin-top:14px; background:var(--ink); border:none; color:var(--bg); font-size:.8rem; font-weight:700; padding:9px 20px; cursor:pointer; }
+  .hint-btn:hover { background:var(--red); }
+  textarea.answer { width:100%; border:2px solid var(--ink); padding:14px; font-family:inherit; font-size:.95rem; font-weight:500; }
+  .submit-btn { display:block; width:100%; margin-top:26px; padding:22px; background:var(--red); color:#fff; border:none; font-weight:900; font-size:1.2rem; letter-spacing:.05em; cursor:pointer; }
+  .submit-btn:hover { background:var(--ink); }
+
+  .footnote { font-size:.78rem; color:#555; margin-top:50px; padding:0 40px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">READ. THINK. ANSWER.</p>
+    <h1 class="title">精読<br>トレーナー</h1>
+    <p class="sub">文章を一文ずつ丁寧に読む力を鍛えよう</p>
+  </header>
+
+  <nav class="tabs">
+    <a href="#" class="active">サンプルテキスト</a>
+    <a href="#">テキストを入力する</a>
+    <a href="#">AIで生成する</a>
+    <a href="#">青空文庫から探す</a>
+  </nav>
+
+  <div class="section">
+    <h2 class="section-title">テキストを選ぶ</h2>
+    <div class="card">
+      <strong>言葉の力</strong>
+      <p class="meta">8文 ・ 412文字 ・ 中学2年生 ・ 言語／文学</p>
+      <p class="preview">わたしたちは日々、言葉を通して考え、言葉を通して人とつながっている…</p>
+    </div>
+
+    <h2 class="section-title" style="margin-top:36px;">本文</h2>
+    <div class="reading-panel">
+      科学技術の発展は、私たちの生活を<span class="marker">飛躍的<sup>①</sup></span>に便利にしてきた。かつて数日かかっていた作業は、今では数秒で終わる。だが、その速さの裏側で、私たちが失いつつあるものは何だろうか。
+    </div>
+
+    <div class="qa-panel">
+      <div class="q-block">
+        <span class="q-giant-num">Q1</span>
+        <p class="q-text">下線部①「飛躍的に」の意味として最も適切なものを選びなさい。</p>
+        <label class="choice"><input type="radio" name="q1" checked> 急激に大きく進歩するさま</label>
+        <label class="choice"><input type="radio" name="q1"> ゆっくりと着実に進むさま</label>
+        <label class="choice"><input type="radio" name="q1"> 予測通りに進むさま</label>
+        <button class="hint-btn">ヒントを見る</button>
+      </div>
+      <div class="q-block">
+        <span class="q-giant-num">Q2</span>
+        <p class="q-text">この段落で筆者が問いかけている内容を40字以内でまとめなさい。</p>
+        <textarea class="answer" rows="3" placeholder="答えを入力してください"></textarea>
+      </div>
+      <button class="submit-btn">回答する →</button>
+    </div>
+
+    <p class="footnote">デザイン案11 ／ 巨大見出し・ポスター系 ― Swissポスターデザインの極端な文字サイズ対比と太い罫線で、装飾なしに強い視覚的インパクトを生む。色数は黒・赤・生成りの3色のみに限定</p>
+  </div>
+</div>
+</body>
+</html>
